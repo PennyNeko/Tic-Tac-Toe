@@ -15,7 +15,9 @@ namespace Triliza
         private const int BUTTON_HEIGHT = 70;
         private const int BUTTON_WIDTH = 70;
 
-        public static List<Player> players = new List<Player>();
+        private const int BOARD_WIDTH = 5;
+        private const int BOARD_HEIGHT = 5;
+        
         Player player1;
         Player player2;
         static Button[,] buttons = new Button[5,5];
@@ -23,31 +25,40 @@ namespace Triliza
         {
             InitializeComponent();
         }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
-
+        
         private void GameForm_Load(object sender, EventArgs e)
         {
-            for(int i= 0; i<5; ++i)
+            CreateBoard();
+
+            Options options = new Options();
+            options.ShowDialog();
+            try
             {
-                for(int j=0; j<5; ++j)
+                player1 = options.player1;
+                player2 = options.player2;
+            }
+            catch
+            {
+                Close();
+            }
+        }
+
+        private void CreateBoard()
+        {
+            for (int i = 0; i < BOARD_WIDTH; ++i)
+            {
+                for (int j = 0; j < BOARD_HEIGHT; ++j)
                 {
                     Button button = new Button
                     {
                         Height = BUTTON_HEIGHT,
                         Width = BUTTON_WIDTH
                     };
-                    button.Location = new Point(i*button.Width, j*button.Height);
+                    button.Location = new Point(i * button.Width, j * button.Height);
                     Controls.Add(button);
                     buttons[i, j] = button;
                 }
             }
-            player1 = players[0];
-            player2 = players[1];
-            
         }
 
         private void GameForm_MouseDown(object sender, MouseEventArgs e)
