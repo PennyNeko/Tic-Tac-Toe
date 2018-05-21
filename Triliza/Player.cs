@@ -17,8 +17,8 @@ namespace Triliza
             PlayerType = playerType;
         }
 
-        string Name { set; get; }
-        Symbol PlayerSymbol { set; get; }
-        Type PlayerType { set; get; }
+        public string Name { set; get; }
+        public Symbol PlayerSymbol { set; get; }
+        public Type PlayerType { set; get; }
     }
 }
